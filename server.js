@@ -72,12 +72,12 @@ app.post("/api/register", (req, res) => {
   const { name, register_id, email_id, password } = req.body;
   // Check if user already exists
   db.query(
-    "SELECT * FROM register WHERE email_id = ?",
-    [email_id],
+    "SELECT * FROM register WHERE register_id = ?",
+    [register_id],
     (err, result) => {
       if (err) throw err;
       if (result.length > 0) {
-        res.status(409).send("User already exists");
+        res.status(409).send("USER ALREADY EXISTS");
       } else {
         // Insert user into database
         db.query(
@@ -85,7 +85,7 @@ app.post("/api/register", (req, res) => {
           [name, register_id, email_id, password],
           (err, result) => {
             if (err) throw err;
-            res.send("User registered successfully");
+            res.send("USER REGISTERED SUCCESSFULLY");
           }
         );
       }
@@ -94,35 +94,17 @@ app.post("/api/register", (req, res) => {
 });
 
 //PERFECT WORKING
-// Login API
-// app.post("/api/login", (req, res) => {
-//   const { register_id, password } = req.body;
-//   const sql = `SELECT * FROM register WHERE register_id='${register_id}'`;
-//   db.query(sql, (err, results) => {
-//     if (err) {
-//       console.error(err);
-//       res.status(500).send("Error logging in");
-//     } else if (results.length === 0) {
-//       res.status(401).send("Register id not found");
-//     } else if (results[0].password !== password) {
-//       res.status(401).send("Invalid password");
-//     } else {
-//       res.send(results[0]);
-//     }
-//   });
-// });
-
 app.post("/api/login", (req, res) => {
   const { register_id, password } = req.body;
   const sql = `SELECT * FROM register WHERE register_id='${register_id}'`;
   db.query(sql, (err, results) => {
     if (err) {
       console.error(err);
-      res.status(500).send("Error logging in");
+      res.status(500).send("ERROR LOGGING IN");
     } else if (results.length === 0) {
-      res.status(401).send("Register id not found");
+      res.status(401).send("REGISTER ID NOT FOUND");
     } else if (results[0].password !== password) {
-      res.status(401).send("Invalid password");
+      res.status(401).send("INVALID PASSWORD");
     } else {
       res.send(results[0]);
     }
@@ -149,7 +131,7 @@ app.post("/api/register-course", (req, res) => {
   db.query(selectQuery, [email_id], (err, selectResults) => {
     if (err) {
       console.error(err);
-      res.status(500).send("Internal server error");
+      res.status(500).send("INTERNAL SERVER ERROR");
     } else if (selectResults.length > 0) {
       // User does exist, insert the user into the users table and update the register count for the course
       // const register_id = selectResults[0].id;
@@ -167,7 +149,7 @@ app.post("/api/register-course", (req, res) => {
       db.query(userQuery, userValues, (err, userResults) => {
         if (err) {
           console.error(err);
-          res.status(500).send("Internal server error");
+          res.status(500).send("INTERNAL SERVER ERROR");
         } else {
           const courseQuery = `
             UPDATE ${course}_courses
@@ -178,17 +160,17 @@ app.post("/api/register-course", (req, res) => {
           db.query(courseQuery, [course_selected], (err, courseResults) => {
             if (err) {
               console.error(err);
-              res.status(500).send("Internal server error");
+              res.status(500).send("INTERNAL SERVER ERROR");
             } else if (courseResults.affectedRows === 0) {
-              res.status(403).send("Course is full");
+              res.status(403).send("COURSE IS FULL");
             } else {
-              res.send("Course registered successfully");
+              res.send("COURSE REGISTERED SUCCESSFULLY");
             }
           });
         }
       });
     } else {
-      res.status(400).send("User not found");
+      res.status(400).send("USER NOT FOUND");
     }
   });
 });
@@ -201,7 +183,7 @@ app.get("/student-details", (req, res) => {
   db.query(selectQuery, (err, results) => {
     if (err) {
       console.error(err);
-      res.status(500).send("Internal server error");
+      res.status(500).send("INTERNAL SERVER ERROR");
     } else {
       res.send(results);
     }
