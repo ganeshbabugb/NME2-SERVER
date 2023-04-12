@@ -204,7 +204,7 @@ app.get("/student-details", (req, res) => {
 
 //Working
 app.get("/aided-courses", (req, res) => {
-  const sql = `SELECT id, value, register_count FROM aided_courses`;
+  const sql = `SELECT id, value, register_count, available_seats FROM aided_courses`;
   db.query(sql, (err, results) => {
     if (err) throw err;
     res.send(results);
@@ -212,7 +212,7 @@ app.get("/aided-courses", (req, res) => {
 });
 
 app.get("/unaided-courses", (req, res) => {
-  const sql = `SELECT id, value, register_count FROM unaided_courses`;
+  const sql = `SELECT id, value, register_count, available_seats FROM unaided_courses`;
   db.query(sql, (err, results) => {
     if (err) throw err;
     res.send(results);
