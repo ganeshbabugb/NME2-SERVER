@@ -36,6 +36,7 @@ CREATE TABLE unaided_courses (
   label VARCHAR(255) NOT NULL,
   value VARCHAR(255) NOT NULL,
   register_count INT NOT NULL DEFAULT 0
+  available_seats INT NOT NULL DEFAULT 60
 );
 
 -- Create the table for storing available aided courses 
@@ -44,6 +45,7 @@ CREATE TABLE aided_courses (
   label VARCHAR(255) NOT NULL,
   value VARCHAR(255) NOT NULL,
   register_count INT NOT NULL DEFAULT 0
+  available_seats INT NOT NULL DEFAULT 60
 );
 
 INSERT INTO aided_courses (label, value) VALUES
@@ -83,11 +85,3 @@ VALUES
   ("Costume Design & Fashion - Fashion Concepts", "Costume Design & Fashion"),
   ("Geography - Climate Change and Global Warming", "Geography"
 );
-
--- this are the simple example to update the register_count
-UPDATE aided_courses SET register_count = register_count + 1 WHERE value = 'English' AND register_count < 60 
-UPDATE unaided_courses SET register_count = register_count + 1 WHERE value = 'Tamil' AND register_count < 60 
-
-
-INSERT INTO student_details (register_id, name, email_id, course, course_selected, department, phone_no)
-VALUES ('dpka23', 'dpka', 'dpka@gmail.com', 'Computer Science', 'Introduction to Programming', 'School of Computing', '1234567890');

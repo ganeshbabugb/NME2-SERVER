@@ -162,9 +162,10 @@ app.post("/api/register-course", (req, res) => {
             } else {
               const courseQuery = `
                 UPDATE ${course}_courses
-                SET register_count = register_count + 1
+                SET register_count = register_count + 1, available_seats = available_seats - 1
                 WHERE value = ?
-                  AND register_count < 60;
+                  AND register_count < 60
+                  AND available_seats > 0;
               `;
               db.query(courseQuery, [course_selected], (err, courseResults) => {
                 if (err) {
