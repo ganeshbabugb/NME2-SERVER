@@ -35,7 +35,7 @@ CREATE TABLE unaided_courses (
   id INT AUTO_INCREMENT PRIMARY KEY,
   label VARCHAR(255) NOT NULL,
   value VARCHAR(255) NOT NULL,
-  register_count INT NOT NULL DEFAULT 0
+  register_count INT NOT NULL DEFAULT 0,
   available_seats INT NOT NULL DEFAULT 60
 );
 
@@ -44,7 +44,7 @@ CREATE TABLE aided_courses (
   id INT AUTO_INCREMENT PRIMARY KEY,
   label VARCHAR(255) NOT NULL,
   value VARCHAR(255) NOT NULL,
-  register_count INT NOT NULL DEFAULT 0
+  register_count INT NOT NULL DEFAULT 0,
   available_seats INT NOT NULL DEFAULT 60
 );
 
