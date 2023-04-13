@@ -8,15 +8,6 @@ CREATE TABLE register (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Create the table for storing user login data
-CREATE TABLE login (
-  id INT PRIMARY KEY AUTO_INCREMENT,
-  register_id VARCHAR(50) NOT NULL,
-  password VARCHAR(50) NOT NULL,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (register_id) REFERENCES registration(register_id)
-);
-
 -- Create the table for storing student details
 CREATE TABLE student_details (
   id INT PRIMARY KEY AUTO_INCREMENT,
@@ -27,7 +18,7 @@ CREATE TABLE student_details (
   course_selected VARCHAR(50) NOT NULL,
   department VARCHAR(50) NOT NULL,
   phone_no VARCHAR(20) NOT NULL,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Create the table for storing available unaided courses 

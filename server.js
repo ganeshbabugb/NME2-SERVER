@@ -220,7 +220,7 @@ app.get("/unaided-courses", (req, res) => {
 });
 
 app.get("/details", (req, res) => {
-  const sql = `SELECT name, register_id, email_id, password FROM register`;
+  const sql = `SELECT id, name, register_id, email_id, password FROM register`;
   db.query(sql, (err, results) => {
     if (err) throw err;
     res.send(results);
